@@ -1,0 +1,13 @@
+import { Button } from '@/components/ui/button';
+import { LoaderCircle } from 'lucide-react';
+
+export default function ConfirmBtn({ handleSubmit, processing }) {
+    return (
+        <form onSubmit={handleSubmit}>
+            <Button type="submit" className="w-full px-6 py-3 text-white md:w-auto" disabled={processing}>
+                {processing && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
+                Confirm Appointment
+            </Button>
+        </form>
+    );
+}
