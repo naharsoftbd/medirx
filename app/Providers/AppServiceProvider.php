@@ -44,27 +44,6 @@ class AppServiceProvider extends ServiceProvider
                 Inertia::share('appSettings', []);
                 View::share('appSettings', []);
             }
-
-            if (Schema::hasTable('pages')) {
-                Inertia::share('menuPages', function () {
-                    return Page::whereNull('parent_id')
-                        ->where('show_in_menu', true)
-                        ->where('is_active', true)
-                        ->orderBy('sort_order')
-                        ->with(['children' => function ($query) {
-                            $query->orderBy('sort_order');
-                        }])
-                        ->get(['id', 'parent_id', 'title', 'slug']);
-                });
-            }
-
-            if (Schema::hasTable('footer_sections')) {
-                Inertia::share('footer', function () {
-                    return FooterSection::with('links', 'footer_contents')
-                        ->orderBy('sort_order')
-                        ->get(['id', 'title', 'sort_order', 'is_icon', 'is_content']);
-                });
-            }
         } catch (\Throwable $e) {
             // Database not ready — likely during first install
             Inertia::share('appSettings', []);

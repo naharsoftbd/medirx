@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Interfaces\Auth;
+
+use App\Models\User;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+interface UserRepositoryInterface
+{
+    public function all(): \Illuminate\Database\Eloquent\Collection;
+
+    public function paginate($search, $perPage): LengthAwarePaginator;
+
+    public function create(array $data): ?User;
+
+    public function update(array $data, $user): int;
+
+    public function delete(int $id): bool;
+
+    public function find(int $id): ?User;
+}

@@ -12,7 +12,8 @@ export function AppSidebar() {
     const menus = props.menus || {};
     const mainNavItems: NavItemWithSubmenu[] = menus;
     const { appSettings } = usePage().props as { appSettings: Record<string, string> };
-    const logoUrl = appSettings?.dashboard_logo ? `/storage/${appSettings?.dashboard_logo}` : '/default/logo.png';
+    console.log(appSettings);
+    const logoUrl = appSettings?.dashboard_logo ? `/storage/${appSettings?.dashboard_logo}` : '/default/dashboard_logo.png';
 
     return (
         <Sidebar collapsible="icon" variant="inset" className="bg-[var(--base-color)] dark:bg-gray-800">

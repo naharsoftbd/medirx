@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             PermissionSeeder::class,
+            AdminMenuSeeder::class,
+            CountriesTableSeeder::class,
+            SettingSeeder::class,
+            SuperAdminSeeder::class
         ]);
     }
 }
