@@ -100,24 +100,6 @@ class PermissionSeeder extends Seeder
             'Appointment Delete',
         ]);
 
-        /*
-         * Assistant
-         */
-        $assistantRole = Role::firstOrCreate([
-            'name' => 'Assistant',
-            'guard_name' => 'web',
-        ]);
-
-        $assistantRole->syncPermissions([
-            'View',
-            'Create',
-            'Edit',
-            'patients.menu',
-            'appointments.menu',
-            'Appointment Create',
-            'Appointment Edit',
-            'Appointment Delete',
-        ]);
 
         /*
          * Clear permission cache again after assigning permissions.
