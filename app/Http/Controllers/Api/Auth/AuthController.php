@@ -30,7 +30,7 @@ class AuthController extends Controller
             'last_name'         => 'required|string|max:255',
             'email'             => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password'          => ['required', 'confirmed', Rules\Password::defaults()],
-            'registration_type' => 'required|string|in:Viewer,Professional',
+            'registration_type' => 'required|string|in:Doctor,Patient',
         ]);
 
         $user = User::create([
@@ -45,7 +45,11 @@ class AuthController extends Controller
 
         event(new Registered($user));
 
-        return ApiResponseService::success([], 'Registration successful!');
+        if ($user) {
+            return $this->generateLoginResponse($user);
+        } else {
+            return ApiResponseService::error('Invalid user creation!', [], Response::HTTP_UNAUTHORIZED);
+        }
     }
 
     public function login(LoginRequest $request)

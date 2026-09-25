@@ -100,6 +100,36 @@ class PermissionSeeder extends Seeder
             'Appointment Delete',
         ]);
 
+        /*
+         * Pharmacy
+         */
+        $patientRole = Role::firstOrCreate([
+            'name' => 'Pharmacy',
+            'guard_name' => 'web',
+        ]);
+
+        $patientRole->syncPermissions([
+            'View',
+            'Create',
+            'Edit',
+            'Delete',
+        ]);
+
+        /*
+         * Hospital
+         */
+        $patientRole = Role::firstOrCreate([
+            'name' => 'Hospital',
+            'guard_name' => 'web',
+        ]);
+
+        $patientRole->syncPermissions([
+            'View',
+            'Create',
+            'Edit',
+            'Delete',
+        ]);
+
 
         /*
          * Clear permission cache again after assigning permissions.

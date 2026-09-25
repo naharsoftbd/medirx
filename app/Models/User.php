@@ -121,4 +121,9 @@ class User extends Authenticatable
     {
         return $this->status === 'inactive';
     }
+
+    public function pharmacy()
+    {
+        return $this->hasOne(Pharmacy::class);
+    }
 }
