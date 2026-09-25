@@ -13,8 +13,8 @@ return new class () extends Migration {
         Schema::table('users', function (Blueprint $table) {
             $table->uuid('uuid')->nullable()->after('id');
             $table->uuid('uuid')->unique()->nullable(false)->change();
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name')->after('uuid');
+            $table->string('last_name')->after('first_name');
             $table->string('mobile')->unique()->nullable()->after('email');
             $table->string('google_id')->nullable()->unique();
             $table->string('password')->nullable()->change(); // Password isn't required for Social login

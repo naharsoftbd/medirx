@@ -101,4 +101,24 @@ class User extends Authenticatable
     {
         return $this->profile_image_url;
     }
+
+    public function getIsActiveAttribute(): bool
+    {
+        return $this->status === 'active';
+    }
+
+    public function getIsPatientAttribute(): bool
+    {
+        return $this->hasRole('Patient');
+    }
+
+    public function getIsAdminAttribute(): bool
+    {
+        return $this->hasRole('Admin');
+    }
+
+    public function getIsInactiveAttribute(): bool
+    {
+        return $this->status === 'inactive';
+    }
 }

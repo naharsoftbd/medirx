@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import AppLayout from '@/layouts/app-layout';
+import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
+import AppLayout from '@/Layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { Bell, FileText, Globe, Image, Monitor, Palette, Settings } from 'lucide-react';

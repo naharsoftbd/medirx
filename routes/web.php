@@ -5,9 +5,62 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', function () {
     return redirect('/login');
+});
+
+Route::get('install', function () {
+    try {
+        // Run migrations
+        Artisan::call('migrate:fresh', ['--force' => true, '--seed' => true]);
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+        Artisan::call('config:cache');
+        Artisan::call('storage:link');
+        // Define the source and destination paths
+        Artisan::call('optimize:clear');
+
+        return [
+            'success' => true,
+            'message' => 'Installation record created successfully.',
+        ];
+    } catch (\Exception $e) {
+        Log::error('InstallRepository error: '.$e->getMessage(), [
+            'trace' => $e->getTraceAsString(),
+        ]);
+
+        return [
+            'success' => false,
+            'data' => null,
+            'message' => 'Failed to create installation record.',
+        ];
+    }
+});
+
+Route::get('/clear', function () {
+    try {
+        // Run migrations
+        Artisan::call('optimize:clear');
+
+        return [
+            'success' => true,
+            'message' => 'Cache clear successfully.',
+        ];
+    } catch (\Exception $e) {
+        Log::error('Cache clear error: '.$e->getMessage(), [
+            'trace' => $e->getTraceAsString(),
+        ]);
+
+        return [
+            'success' => false,
+            'data' => null,
+            'message' => 'Failed to Cache clear.',
+        ];
+    }
 });
 
 
