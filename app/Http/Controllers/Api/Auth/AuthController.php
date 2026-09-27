@@ -151,10 +151,49 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        if (Auth::check()) {
-            $request->user()->tokens()->delete();
+        $user = $request->user();
+
+        if ($user) {
+            $request->user()->currentAccessToken()->delete();
+            $user->tokens()->delete();
         }
 
         return ApiResponseService::success([], 'Successfully logged out!');
+    }
+
+    public function refresh(Request $request)
+    {
+        $user = $request->user();
+
+        // Delete the old tokens
+        $user->tokens()->delete();
+
+        // Generate new tokens
+        $tokens = AuthService::generateTokens($user);
+
+        $userResource = new UserBasicResource($user);
+        $roles = $user->getRoleNames();
+        $permissions = $user->getPermissionsViaRoles()->pluck('name');
+
+        $userData = [
+            'user'   => $userResource->resolve(),
+            'tokens' => [
+                'accessToken'  => $tokens['accessToken'],
+                'refreshToken' => $tokens['refreshToken'],
+            ],
+            'authorization' => [
+                'roles'       => $roles,
+                'permissions' => $permissions,
+            ],
+        ];
+
+        return ApiResponseService::success($userData, 'Token refreshed successfully!');
+    }
+
+    public function user(Request $request)
+    {
+        $userData = $request->user();
+
+        return ApiResponseService::success($userData, 'Token refreshed successfully!');
     }
 }

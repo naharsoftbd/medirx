@@ -12,10 +12,6 @@ Route::middleware('web')->group(function () {
     Route::get('/doctor', function () {
         return redirect()->intended('/dashboard');
     });
-
-    Route::get('/doctor-list', [DoctorController::class, 'index'])
-        ->name('doctors.list.index');
-    Route::get('/doctor/{doctor}', [DoctorController::class, 'frontendShow'])->name('doctors.frontend.show');
 });
 
 Route::prefix('admin/doctor')->middleware(['web', 'auth', 'role.redirect:Doctor'])->group(function () {
