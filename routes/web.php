@@ -2,12 +2,9 @@
 
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -28,14 +25,14 @@ Route::get('install', function () {
             'success' => true,
             'message' => 'Installation record created successfully.',
         ];
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         Log::error('InstallRepository error: '.$e->getMessage(), [
             'trace' => $e->getTraceAsString(),
         ]);
 
         return [
             'success' => false,
-            'data' => null,
+            'data'    => null,
             'message' => 'Failed to create installation record.',
         ];
     }
@@ -50,19 +47,18 @@ Route::get('/clear', function () {
             'success' => true,
             'message' => 'Cache clear successfully.',
         ];
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         Log::error('Cache clear error: '.$e->getMessage(), [
             'trace' => $e->getTraceAsString(),
         ]);
 
         return [
             'success' => false,
-            'data' => null,
+            'data'    => null,
             'message' => 'Failed to Cache clear.',
         ];
     }
 });
-
 
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -71,4 +67,5 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
+require __DIR__.'/doctor.php';
 require __DIR__.'/admin.php';

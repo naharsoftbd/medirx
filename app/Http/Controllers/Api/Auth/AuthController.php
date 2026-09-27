@@ -8,6 +8,7 @@ use App\Http\Resources\Auth\UserBasicResource;
 use App\Models\User;
 use App\Services\ApiResponseService;
 use App\Services\AuthService;
+use App\Services\RewardSystemService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -121,7 +122,7 @@ class AuthController extends Controller
     protected function generateLoginResponse($user)
     {
         try {
-            app(\App\Services\RewardSystemService::class)->awardDailyLoginPointsIfEligible($user);
+            app(RewardSystemService::class)->awardDailyLoginPointsIfEligible($user);
         } catch (\Throwable $exception) {
             logger()->warning('Daily login reward could not be awarded: '.$exception->getMessage());
         }

@@ -37,7 +37,7 @@ class PermissionSeeder extends Seeder
          */
         foreach ($permissions as $permission) {
             Permission::firstOrCreate([
-                'name' => $permission,
+                'name'       => $permission,
                 'guard_name' => 'web',
             ]);
         }
@@ -46,7 +46,7 @@ class PermissionSeeder extends Seeder
          * Admin
          */
         $adminRole = Role::firstOrCreate([
-            'name' => 'Admin',
+            'name'       => 'Admin',
             'guard_name' => 'web',
         ]);
 
@@ -67,7 +67,7 @@ class PermissionSeeder extends Seeder
          * Doctor
          */
         $doctorRole = Role::firstOrCreate([
-            'name' => 'Doctor',
+            'name'       => 'Doctor',
             'guard_name' => 'web',
         ]);
 
@@ -87,7 +87,7 @@ class PermissionSeeder extends Seeder
          * Patient
          */
         $patientRole = Role::firstOrCreate([
-            'name' => 'Patient',
+            'name'       => 'Patient',
             'guard_name' => 'web',
         ]);
 
@@ -104,7 +104,7 @@ class PermissionSeeder extends Seeder
          * Pharmacy
          */
         $patientRole = Role::firstOrCreate([
-            'name' => 'Pharmacy',
+            'name'       => 'Pharmacy',
             'guard_name' => 'web',
         ]);
 
@@ -119,7 +119,7 @@ class PermissionSeeder extends Seeder
          * Hospital
          */
         $patientRole = Role::firstOrCreate([
-            'name' => 'Hospital',
+            'name'       => 'Hospital',
             'guard_name' => 'web',
         ]);
 
@@ -129,7 +129,6 @@ class PermissionSeeder extends Seeder
             'Edit',
             'Delete',
         ]);
-
 
         /*
          * Clear permission cache again after assigning permissions.

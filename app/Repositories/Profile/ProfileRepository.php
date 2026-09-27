@@ -46,19 +46,19 @@ class ProfileRepository implements ProfileRepositoryInterface
         }
 
         $doctor = Doctor::create([
-            'user_id' => $this->user_id,
-            'phone' => $data['phone'] ?? null,
-            'gender' => $data['gender'] ?? null,
-            'dob' => $data['dob'] ?? null,
-            'specialization' => $data['specialization'] ?? null,
+            'user_id'           => $this->user_id,
+            'phone'             => $data['phone'] ?? null,
+            'gender'            => $data['gender'] ?? null,
+            'dob'               => $data['dob'] ?? null,
+            'specialization'    => $data['specialization'] ?? null,
             'working_institute' => $data['working_institute'] ?? null,
-            'designation' => $data['designation'] ?? null,
-            'qualification' => $data['qualification'] ?? null,
-            'registration_no' => $data['registration_no'] ?? null,
-            'experience_years' => $data['experience_years'] ?? null,
-            'bio' => $data['bio'] ?? null,
-            'social' => $data['social'],
-            'active' => $data['active'] ?? true,
+            'designation'       => $data['designation'] ?? null,
+            'qualification'     => $data['qualification'] ?? null,
+            'registration_no'   => $data['registration_no'] ?? null,
+            'experience_years'  => $data['experience_years'] ?? null,
+            'bio'               => $data['bio'] ?? null,
+            'social'            => $data['social'],
+            'active'            => $data['active'] ?? true,
         ]);
 
         $this->user->specialties()->sync($data['specialization_ids']);
@@ -86,18 +86,18 @@ class ProfileRepository implements ProfileRepositoryInterface
         }
 
         $doctor = $doctor->update([
-            'phone' => $data['phone'] ?? null,
-            'gender' => $data['gender'] ?? null,
-            'dob' => $data['dob'] ?? null,
-            'specialization' => $data['specialization'] ?? null,
+            'phone'             => $data['phone'] ?? null,
+            'gender'            => $data['gender'] ?? null,
+            'dob'               => $data['dob'] ?? null,
+            'specialization'    => $data['specialization'] ?? null,
             'working_institute' => $data['working_institute'] ?? null,
-            'designation' => $data['designation'] ?? null,
-            'qualification' => $data['qualification'] ?? null,
-            'registration_no' => $data['registration_no'] ?? null,
-            'experience_years' => $data['experience_years'] ?? null,
-            'bio' => $data['bio'] ?? null,
-            'social' => $data['social'],
-            'active' => $data['active'] ?? true,
+            'designation'       => $data['designation'] ?? null,
+            'qualification'     => $data['qualification'] ?? null,
+            'registration_no'   => $data['registration_no'] ?? null,
+            'experience_years'  => $data['experience_years'] ?? null,
+            'bio'               => $data['bio'] ?? null,
+            'social'            => $data['social'],
+            'active'            => $data['active'] ?? true,
         ]);
 
         $this->user->specialties()->sync($data['specialization_ids']);

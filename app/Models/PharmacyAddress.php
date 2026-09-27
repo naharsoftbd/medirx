@@ -27,8 +27,8 @@ class PharmacyAddress extends Model
     protected function casts(): array
     {
         return [
-            'latitude' => 'decimal:7',
-            'longitude' => 'decimal:7',
+            'latitude'   => 'decimal:7',
+            'longitude'  => 'decimal:7',
             'is_primary' => 'boolean',
         ];
     }

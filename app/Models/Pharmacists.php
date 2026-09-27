@@ -29,7 +29,7 @@ class Pharmacist extends Model
     protected function casts(): array
     {
         return [
-            'is_primary' => 'boolean',
+            'is_primary'  => 'boolean',
             'verified_at' => 'datetime',
         ];
     }
