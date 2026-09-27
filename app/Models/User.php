@@ -126,4 +126,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Pharmacy::class);
     }
+
+    public function doctor()
+    {
+        return $this->hasOne(Doctor::class);
+    }
+
+    public function specialties()
+    {
+        return $this->belongsToMany(MedicalSpecialty::class, 'doctor_specialty', 'doctor_id', 'medical_specialty_id')->withTimestamps();
+    }
 }

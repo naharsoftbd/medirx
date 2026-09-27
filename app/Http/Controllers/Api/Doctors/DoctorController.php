@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Api\Doctors;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Resources\DoctorResource;
-use App\Http\Requests\Doctor\CreateDoctorRequest;
-use App\Http\Requests\Doctor\UpdateDoctorRequest;
-use App\Services\Doctors\DoctorService;
+use App\Http\Resources\Doctors\DoctorResource;
+use App\Http\Requests\Doctor\CreateDoctorProfileRequest;
+use App\Http\Requests\Doctor\UpdateDoctorProfileRequest;
+use App\Services\Profile\ProfileServices;
 use App\Services\ApiResponseService;
 
 class DoctorController extends Controller
 {
     public function __construct(
-        protected DoctorService $doctorService
+        protected ProfileServices $profileService
     ) {
     }
     /**
@@ -27,15 +27,15 @@ class DoctorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateDoctorRequest $request)
+    public function store(CreateDoctorProfileRequest $request)
     {
         $data = $request->validated();
 
-        $doctor = $this->doctorService->create($data);
+        $doctor = $this->profileService->createDoctorProfile($data);
 
         $doctorData = new DoctorResource($doctor);
 
-        return ApiResponseService::success($doctorData, 'Login successful!');
+        return ApiResponseService::success($doctorData, 'Profile created successfully!');
     }
 
     /**
@@ -49,7 +49,7 @@ class DoctorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDoctorRequest $request, string $id)
+    public function update(UpdateDoctorProfileRequest $request, string $id)
     {
         //
     }
