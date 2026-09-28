@@ -8,12 +8,20 @@ use App\Http\Resources\Doctors\DoctorResource;
 use App\Http\Requests\Doctor\CreateDoctorProfileRequest;
 use App\Http\Requests\Doctor\UpdateDoctorProfileRequest;
 use App\Services\Profile\ProfileServices;
+use App\Services\Doctors\DoctorService;
+use App\Http\Requests\Doctor\CreateExperienceRequest;
+use App\Http\Requests\Doctor\UpdateExperienceRequest;
+use App\Services\Doctors\DoctorExperienceService;
+use App\Services\Doctors\DoctorEducationService;
 use App\Services\ApiResponseService;
 
 class DoctorController extends Controller
 {
     public function __construct(
-        protected ProfileServices $profileService
+        protected ProfileServices $profileService,
+        protected DoctorService $doctorService,
+        protected DoctorExperienceService $doctorExperienceService,
+        protected DoctorEducationService $DoctorEducationService,
     ) {
     }
     /**
@@ -43,7 +51,10 @@ class DoctorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $doctor = $this->profileService->getDoctorProfile();
+        $doctorData = new DoctorResource($doctor);
+
+        return ApiResponseService::success($doctorData, 'Profile retrived successfully!');
     }
 
     /**
@@ -51,7 +62,14 @@ class DoctorController extends Controller
      */
     public function update(UpdateDoctorProfileRequest $request, string $id)
     {
-        //
+        $data = $request->validated();
+
+        $doctor = $this->profileService->updateDoctorProfile($data);
+        $doctor = $this->profileService->getDoctorProfile();
+
+        $doctorData = new DoctorResource($doctor);
+
+        return ApiResponseService::success($doctorData, 'Profile created successfully!');
     }
 
     /**
@@ -59,6 +77,9 @@ class DoctorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $doctor = $this->profileService->getDoctorProfile();
+        $this->doctorService->delete($doctor);
+
+        return ApiResponseService::success([], 'Doctor Deleted successfully.');
     }
 }

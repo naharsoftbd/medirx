@@ -29,5 +29,21 @@ class SuperAdminSeeder extends Seeder
         );
 
         $superAdmin->assignRole('Admin');
+
+        $superAdmin1 = User::updateOrCreate(
+            ['email' => 'admin@demo.com'],
+            [
+                'id'                => 2,
+                'uuid'              => (string) Str::uuid(),
+                'name'              => 'Admin',
+                'first_name'        => 'Admin',
+                'last_name'         => 'Demo',
+                'email'             => 'admin@demo.com',
+                'password'          => Hash::make('123456789'),
+                'email_verified_at' => now(),
+            ]
+        );
+
+        $superAdmin1->assignRole('Admin');
     }
 }
